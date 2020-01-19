@@ -53,7 +53,6 @@ print(sum_recursion(b,4))
 print(sum_binary_recursion(b,0,4))
 
 
-
 #任意给子序列，求其中和最大的序列
 ## 暴力求解
 def gs_BF(a):
@@ -69,6 +68,7 @@ def gs_BF(a):
 a = [1,2,-3,4]
 print(gs_BF(a))
             
+
 # 增量策略，计算从0-n,1-n,2-n 中间如果有负数，并不会更新gs的值
 # incremental strategy
 def gs_IC(a): 
@@ -116,16 +116,23 @@ def gs_DC(a,lo,hi):
     return max(gsl+gsR,max(gs_DC(a,lo,mi),gs_DC(a,mi,hi)))
         
 a = [1,2,-3,4,6]
-print(gs_DC(a,0,4))
+print(gs_DC(a,0,5))
 
 
-# def gs_LS(a,n):
-#     gs,s,i,j = a[0],0,n-1,n
-#     while 0<i:
-#         s += a[i]
-#         pass
+def gs_LS(a,n):
+    gs,s,i = a[0],0,n-1
+    while 0<i:
+        s += a[i]   #递增得到总和
+        if gs < s:  # 择优，更新
+            gs = s
+        if s <=0:  
+            s = 0
+            # j = i
+        i -= 1
+    return gs
 
-
+a = [1,2,-3,4,6]
+print(gs_LS(a,5))
 
 
 # 在vector中，所有数据项的物理存放地址与逻辑次序完全重合，此时的逻辑次序也称为秩(rank)
@@ -133,8 +140,3 @@ print(gs_DC(a,0,4))
 # a = ['test']
 # a.extend([1,2,3])
 # print(a)
-a = {}
-a[(1,2)] =3
-a[(2,2)] =4
-a[(2,4)] =6
-print(a)
