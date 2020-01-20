@@ -4,7 +4,7 @@ title: "部分pytorch函数说明 "
 categories: misc
 ---
 
-# pytorch 不常用函数的使用
+# pytorch 部分函数的使用
 ## torch.nn.functional使用自定义卷积
 
 ```python
@@ -14,4 +14,13 @@ inputs = torch.randn(1,4,5,5)
 outputs = F.conv2d(inputs, filters, padding=1)
 print(outputs.shape)
 # torch.Size([1, 8, 5, 5])
+```
+
+## pytorch 计算非0值的索引
+```python
+    b = torch.tensor([[0,1,2],[0,1,2]])
+    x = torch.eq(b,1)
+    print(x.nonzero())
+# tensor([[0, 1],
+#        [1, 1]])
 ```
