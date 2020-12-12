@@ -24,5 +24,17 @@ def f3():
 
 
 
+## enumulate的使用
+可以用enumerate来代替range,enumerate的第二个参数可以指定索引的起始点
+```python
+a = ['a','b','c']
+for i,name in enumerate(a):
+    print(i,name)
+
+for i,name in enumerate(a,1):
+    print(i,name)
+```
+
+
 
 
