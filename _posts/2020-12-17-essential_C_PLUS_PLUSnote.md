@@ -111,6 +111,49 @@ void test_pointer_algorithm() {
 }
 ```
 
+### 3.6如何设计一个泛型算法
+```c++
+bool less_than(int v1, int v2) {
+	return v1 < v2 ? true: false;
+}
+
+bool greater_than(int v1, int v2) {
+	return v1 > v2 ? true: false;
+}
+//泛型算法
+vector<int> filter(const vector<int>& vec, int filter_value, bool(*pred)(int, int)) {
+	vector<int> nvec;
+	for (int ix = 0; ix < vec.size(); ++ix)
+		if (pred(vec[ix], filter_value))
+			nvec.push_back(vec[ix]);
+	return nvec;
+}
+
+
+void testfilter() {
+	vector<int> input{ 1,2,3,4,5,6 };
+	vector<int> output = filter(input, 3, less_than);
+	//采用lambda表达式进行计算
+	vector<int> output1 = filter(input, 3, [](int x, int y) {return x < y; });
+}
+```
+
+## 4.基于对象的编程风格
+### 4.3 mutable 和 const
+```c++
+class Triangular{
+    int length() const {return length;}
+    int beg_pos() const {return _beg_pos;}
+    int elem(int pos) const;
+
+    bool next(int &val);
+    void next_reset(){
+        _next = _beg
+    }
+}
+
+```
+
 
 
 
