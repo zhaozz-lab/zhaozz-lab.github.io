@@ -154,6 +154,40 @@ class Triangular{
 
 ```
 
+### 4.5 静态类成员
+member function只有在“不访问任何non-static member”的条件下才能声明为static，声明方式是在声明之前加上关键字static；
+```c++
+static is_elem();
+```
+
+### 4.6 打造一个 Iteror class
+* 运算符重载的规则：
+* 不可以引入新的运算符，除了 . .* :: ?:,其他的运算符都可以被重载
+* 运算符的操作数（operand）个数不可改变。每个二元运算符都需要两个操作数，每个一元都需要恰好一个操作数，因此，我们无法定义出一个equality运算符，并令他接受两个以上或者两个一下的操作数。
+* 运算符的优先级不可以改变
+* 运算符的参数列表中，必须至少一个参数为class类型，也就是说，我们无法为诸如，指针之类的non-class 类型，重新定义其原已经存在的运算符。 
+```c++
+inline int Triangular_iterator::
+operator*() const
+{
+check_integrity();
+return Triangular::_elems[_index];
+}
+
+```
+也可以像non-member function 一样
+
+```c++
+inline int 
+operator*(const  Triangular_iterator &rhs) const
+{
+rhs.check_integrity();
+//注意，如果这是一个non-member function,就不具有访问non-public member的权力
+return Triangular::_elems[_index];
+}
+
+```
+
 
 
 
